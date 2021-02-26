@@ -1,0 +1,113 @@
+{% load static %}
+{% include 'navigation.html' %}
+<style>
+    [class*="col-"] {
+        width: 100%;
+    }
+    @media only screen and (min-width: 280px) {
+        .bg-secondary{
+            width: 90%;
+            padding: 4%;
+            border-radius: 10px;
+            background-color: rgb(136, 0, 52,0.8) !important;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .bg-secondary{
+        width: 80%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgb(136, 0, 52,0.8) !important;
+        }
+    }
+    @media only screen and (min-width: 900px) {
+        .bg-secondary{
+        width: 70%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgb(136, 0, 52,0.8) !important;
+        }
+    }
+    @media only screen and (min-width: 1080px) {
+        .bg-secondary{
+        width: 50%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgba(136, 0, 52,0.8) !important;
+        }
+    }
+    .bg{
+            padding-top: 1%;
+            padding-bottom: 5%;
+            background-image: url("{% static 'images\main.png' %}");
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 100%;
+        }
+</style>
+{% block body %}
+
+    <marquee style="font-size: 20px; font-family: 'Monotype Corsiva'; background: rgba(0, 0, 0, 0.2); font-weight: 400; color: rgb(136, 0, 52); margin-top: 2px;" direction="rtol">Admin Login</marquee>
+<div class="bg">
+    <form class="container bg-secondary text-white mt-5" action="" method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <h1><i class="fa fa-user-shield"></i> Admin Login</h1>
+        </div>
+        <div class="form-row mt-5">
+            <div class="form-group col-md-12">
+                <label for="uname" style="font-size: large;"><i class="fa fa-user-shield"></i> UserName</label>
+                <input type="text" name="uname" class="form-control" placeholder="Enter UserName" required autofocus>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="pwd" style="font-size: large;"><i class="fa fa-key"></i> Password</label>
+                <input type="password" name="pwd" class="form-control" placeholder="Enter Password" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 mt-3">
+                <a href="{% url 'home' %}" class="btn btn-danger form-control " value="CANCEL" style="font-size: 20px; font-weight: bold;  border: 1px solid white; background-color: rgb(136, 0, 52); box-shadow: 4px 4px white;">CANCEL</a>
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <input type="submit" class="btn btn-success wave-effect form-control" value="LOGIN" style="font-size: 20px; font-weight: bold; border: 1px solid; background-color: rgb(136, 0, 52); box-shadow: 4px 4px white;">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% ifequal error "no" %}
+    <script>
+        const Toast = Swal.mixin({
+            toast: false,
+            position: 'center',
+            height:800,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+
+            Toast.fire({
+            icon: 'success',
+            title: 'Signed In Successfully',
+            text: 'Redirecting to Admin Home Page.....'
+            }).then((result) => {
+                window.location = ("{% url 'admin_home' %}");
+            })
+    </script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+    <script>
+        swal.fire({title: 'Oops...',text:'Invalid Login Credentials', icon : 'error', timer:2500})
+    </script>
+{% endifequal %}
+
+{% include 'footer.html' %}

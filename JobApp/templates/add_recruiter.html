@@ -1,0 +1,169 @@
+{% load static %}
+{% include 'admin_navigation.html' %}
+<style>
+    @media only screen and (min-width: 280px) {
+        .bg-secondary{
+        width: 95%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgba(128, 18, 128, 0.6) !important;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .bg-secondary{
+        width: 80%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgba(128, 18, 128, 0.6) !important;
+        }
+    }
+    @media only screen and (min-width: 900px) {
+        .bg-secondary{
+        width: 80%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgba(128, 18, 128, 0.6) !important;
+        }
+    }
+    @media only screen and (min-width: 1080px) {
+        .bg-secondary{
+        width: 50%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: rgba(128, 18, 128, 0.6) !important;
+        }
+    }
+    .bg{
+        padding-top: 3%;
+        padding-bottom: 5%;
+        background-image: url("{% static 'images\acp.png' %}");
+        background-repeat: repeat;
+        background-position: center;
+        background-size: 100%;
+    }
+</style>
+{% block body %}
+<marquee style="font-size: 20px; font-family: 'Monotype Corsiva'; background: rgba(0, 0, 0, 0.2); font-weight: 400; color: purple; margin-top: 2px;" direction="rtol">Add Recruiter</marquee>
+<div class="bg">
+    <form class="container bg-secondary text-white mt-1 p-3" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="text-center mb-5">
+            <h1><i class="fa fa-user-alt"></i> Add New Recruiter</h1>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6">
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" class="form-control" placeholder="Enter First Name" required autofocus>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="lname">Last Name</label>
+                <input type="text" name="lname" class="form-control" placeholder="Enter Last Name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="contact">Contact</label>
+                <input type="text" name="contact" class="form-control" placeholder="Enter Contact Number" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter Email ID" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="pwd">Password</label>
+                <input id="p1" type="password" name="pwd" class="form-control" placeholder="Enter Password" onchange="onChange()" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="cpwd">Confirm Password</label>
+                <input id="p2" type="password" name="cpwd" class="form-control" placeholder="Enter Password Again" onchange="onChange()" required>
+            </div>
+            
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="company">Company Name</label>
+                <input type="text" name="company" class="form-control" placeholder="Enter Company Name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="">Gender </label>
+                <div style="border: 1px solid lightgrey; padding: 6px; border-radius: 6px; background-color: white; color: black;">    
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input " id="customRadio1" name="gender" value="Male" required>
+                        <label class="custom-control-label" for="customRadio1"> Male</label>
+                    </div> 
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input " id="customRadio2" name="gender" value="Female" required>
+                        <label class="custom-control-label" for="customRadio2"> Female</label>
+                    </div>  
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="image">Image</label>
+                <input type="file" name="image" class="form-control" style="padding: 2px;" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <input type="submit" class="btn btn-dark form-control mt-2" value="Add Recruiter" style="font-size: 20px; font-weight: bold; border: 1px solid; background-color: purple; box-shadow: 4px 4px 4px white;">
+
+            </div>
+        </div>
+    </form>   
+</div>
+
+{% endblock %}
+<script>
+    function onChange() {
+        const password = document.getElementById('p1');
+        const confirm = document.getElementById('p2');
+        if (confirm.value === password.value) {
+            confirm.setCustomValidity('');
+            
+        } else {
+            confirm.setCustomValidity('Passwords do not match');
+        }
+    }
+    password.keyup = validatePassword;
+    confirm.onChange = validatePassword;
+</script>
+
+{% ifequal error "no" %}
+    <script>
+        const Toast = Swal.mixin({
+            toast: false,
+            position: 'center',
+            height:800,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+
+            Toast.fire({
+            icon: 'success',
+            title: 'Registration Done Successfully',
+            text: 'Redirecting to Login Page.....'
+            }).then((result) => {
+                window.location = ("{% url 'view_recruiters' %}");
+            })
+    </script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+    <script>
+        swal.fire({title: 'Oops...',text:'Something Went Wrong', icon : 'error', timer:25000})
+    </script>
+{% endifequal %}
+
+{% include 'admin_footer.html' %}

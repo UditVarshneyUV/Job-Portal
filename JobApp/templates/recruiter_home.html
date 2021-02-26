@@ -1,0 +1,25 @@
+{% load static %}
+
+{% include 'recruiter_navigation.html' %}
+
+<style>
+    .banner{
+        background-color: transparent;
+        position: relative;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 100%;
+    }
+</style>
+
+{% block body %}
+
+<div class="container text-center mt-1">
+    <img src="{% static 'images\rbg.jpg' %}" alt="" width="80%">
+</div>
+
+{% endblock %}
+
+{% include 'recruiter_footer.html' %}

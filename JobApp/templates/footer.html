@@ -1,0 +1,37 @@
+{% load static %}
+
+{% block body%}
+<div style="width: 100%; height: auto; background-color: rgb(136, 0, 52); margin-top: 3%; padding-top: 2%;">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-4 mt-4 text-white">
+                <h3>Contact Information</h3>
+                <p style=" font-size: 20px;"><i class="fa fa-map-marker text-danger"></i> Soron Gate, Kasganj</p>
+                <p style=" font-size: 20px;"><i class="fa fa-envelope-square text-danger"></i> udit.k.varshney@gmail.com</p>
+                <p style=" font-size: 20px;"><i class="fa fa-mobile-alt text-danger"></i> +8430578710</p>
+            </div>
+
+            <div class="col-md-4 mt-4 text-white">
+                <h3>Online Placement</h3>
+                <p style=" font-size: 18px; text-align: justify;">An Employment Website is a website that deals specially with
+                    employment or careers. Many Employment Website are designed to allow employers to post Job Requirements for a
+                    position to be filled and are commonly known as Job Boards.
+                </p>
+            </div>
+
+            <div class="col-md-4 mt-4 text-white">
+                <h3>Newsletter</h3>
+                <p style=" font-size: 18px;">
+                    If You need extra Information, feel free to ask....
+                </p>
+                <form action="" method="post" class="form-inline ml-1 input-group"> 
+                    {% csrf_token %}
+                    <input type="email" class="form-control mr-1" placeholder="Enter your Email ID" required>
+                    <input type="submit" class="btn btn-danger input-group-inline" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

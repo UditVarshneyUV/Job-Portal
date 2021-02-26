@@ -1,0 +1,141 @@
+{% load static %}
+
+{% include 'student_navigation.html' %}
+
+<style>
+    .card {
+        border-radius: 10px;
+        -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+        border: none;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    .bg-c-lite-green {
+        background: -webkit-gradient(linear, left top, right top, from(#6384f2), to(#7c3ce4));
+        background: linear-gradient(to right, rgba(16, 77, 189), rgba(16, 77, 189))
+    }
+    .user-profile {
+        border-radius: 5px 0 0 5px;
+        padding: 20px 0;
+    }
+    .card .social-link li {
+        display: inline-block;
+    }
+    .card .social-link li a {
+        font-size: 20px;
+        margin: 0 10px 0 0;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out
+    }
+    .user-img {
+        border-radius: 50%;
+        width: 140px;
+    }
+    .heading{
+        color: rgb(9, 68, 168);
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 20px;
+        padding-bottom: 5px;
+        font-weight: 600;
+    }
+    .label{
+        margin-bottom: 10px;
+        font-weight: 600;
+        text-align: center;
+    }
+    @media screen and (min-width: 200px) and (max-width: 575px) {
+        .info{
+        color: #919aa3;
+        font-weight: 400;
+        text-align: left;
+        }
+        .label{
+        margin-bottom: 10px;
+        font-weight: 600;
+        text-align: left;
+        }
+    }
+    .info{
+        color: #919aa3;
+        font-weight: 400;
+    }
+    .bg{
+            padding-top: 5px;
+            padding-bottom: 5%;
+            background-image: url("{% static 'images\profile-bg.png' %}");
+            background-repeat: repeat;
+            background-size: 100%;
+    }
+    .img-bg{
+        padding-top: 5px;
+        padding-bottom: 5%;
+        background-image: url("{% static 'images\img-bg1.png' %}");
+        background-repeat: repeat;
+        background-size: 100%;
+    }
+    .info-bg{
+        padding-top: 5px;
+        padding-bottom: 5%;
+        background-image: url("{% static 'images\bg2.png' %}");
+        background-repeat: repeat;
+        background-size: 100%;
+    }
+
+</style>
+
+{% block body%}
+<div class="bg">
+<div class="container d-flex justify-content-center" style="padding: 3rem;">
+    <div class="card row">
+        <div class="col-sm-12 img-bg" style="padding: 20px;">
+            <div class="text-center text-white pt-2">
+                <div style="margin-bottom: 25px;">
+                    <img src="{{student.image.url}}" class="user-img" alt="User-Profile-Image">
+                </div>
+                <h2>{{student.user.first_name}} {{student.user.last_name}}</h2>
+                <p>Web Designer</p>
+                <i class="fa fa-edit"></i>
+            </div>
+        </div>
+        <div class="col-sm-12 info-bg">
+            <h3 class="heading text-center">Information</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4 class="label">Name</h4>                                    
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="info">{{student.user.first_name}} {{student.user.last_name}}</h4>                                    
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="label">Email</h4>                                    
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="info">{{student.user.username}}</h4>                                    
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="label">Contact</h4>
+                </div>
+                <div class="col-sm-6 ">
+                    <h4 class="info">{{student.mobile}}</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="label">Gender</h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4 class="info">{{student.gender}}</h4>
+                </div>
+            </div>
+            <ul class="social-link list-unstyled mt-1 text-center">
+                <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% include 'student_footer.html' %}

@@ -1,0 +1,111 @@
+{% load static %}
+{% include 'navigation.html' %}
+
+<style>
+    @media screen and (min-width: 280px) and (max-width: 300px) {
+        .std{
+            width: 250px;
+            border-radius: 20px;
+            height: 150px !important;
+            /* margin-left: 15% !important;
+            margin-top: 10%; */
+        }
+        .img{
+            width: 100%;
+        }
+    }
+    @media screen and (min-width: 300px) and (max-width: 580px) {
+        .std{
+            width: 250px;
+            border-radius: 20px;
+            height: 150px !important;
+            margin-left: 10% !important;
+            margin-top: 5%;
+        }
+        .img{
+            width: 100%;
+        }
+    }
+    @media screen and (min-width: 580px) and (max-width: 800px) {
+        .std{
+            width: 200px;
+            border-radius: 20px;
+            height: 150px !important;
+            margin-left: 3%;
+        }
+        .img{
+            width: 80%;
+            margin-left: 10%;
+        }
+    }
+    @media screen and (min-width: 800px)  and (max-width: 950px) {
+        .std{
+            width: 200px;
+            border-radius: 20px;
+            height: 150px !important;
+            margin-left: 2%;
+        }
+        .img{
+            width: 70%;
+            margin-left: 15%;
+        }
+    }
+    @media screen and (min-width: 950px) and (max-width: 1080px) {
+        .std{
+            width: 200px;
+            border-radius: 20px;
+            height: 200px !important;
+            margin-left: 2%;
+        }
+        .img{
+            width: 75%;
+            margin-left: 15%;
+        }
+    }
+    @media screen and (min-width: 1080px) {
+        .std{
+            width: 200px;
+            border-radius: 20px;
+            height: 200px !important;
+            margin-left: 6%;
+        }
+        .img{
+            width: 60%;
+            margin-left: 18%;
+        }
+    }
+    
+    
+</style>
+
+{% block body %}
+
+<div class="jumbotron-fluid">
+    <img src="{% static 'images\banner.png' %}" alt="" class="img"  style="margin-top: 5%;">
+</div>
+
+<div class="container bg-dark mt-5 text-center" style="height: auto; border-radius: 10px;">
+    <h3 class="text-center text-success pt-3"> | PLACED STUDENTS |</h3> 
+    {% for i in '01'|make_list %} 
+    <div class="row ">
+        {% for i in '0123'|make_list %}
+        
+        <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
+            <div class="card std">
+                <img src="{% static 'images\icici.jfif' %}" alt="image" class="std">
+                <div class="card-title">
+                    <p class="text-center text-white">ICICI</p>
+                </div>
+            </div>
+        </div>
+        
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <div style="padding-bottom: 8%;"><br></div>
+</div>
+    
+
+{% endblock %}
+
+{% include 'footer.html' %}

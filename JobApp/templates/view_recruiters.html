@@ -1,0 +1,74 @@
+{% load static %}
+
+{% include 'admin_navigation.html' %}
+
+{% block body %}
+
+<div class="container mt-5 text-center">
+    <h1 style="color: purple; font-weight: bold; padding: 10px; margin-bottom: 10px;">View All Recruiters</h1>
+    <a href="{% url 'add_recruiter' %}" class="btn btn-dark" style="background-color: purple; font-weight: bold; padding: 10px; margin-bottom: 60px;">Add Recruiter</a>
+    <table class="table-responsive-md table-responsive-sm table-dark text-center" id="tables" style="background-color: purple;">
+        <thead>
+            <tr class="">
+                <th>S.No.</th>
+                <th>Full Name</th>
+                <th>Email Id</th>
+                <th>Contact</th>
+                <th>Gender</th>
+                <th>Company Name</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in recruiters %}
+            <tr class="text-dark bg-white font-weight-bolder">
+                <td>{{forloop.counter}}</td>
+                <td>{{r.user.first_name}} {{r.user.last_name}}</td>
+                <td>{{r.user.username}}</td>
+                <td>{{r.mobile}}</td>
+                <td>{{r.gender}}</td>
+                <td>{{r.company}}</td>
+                <td><img src="{{r.image.url}}" style="width: 100px; height: 80px; border-radius: 50%; "></td>
+                <td>{{r.status}}</td>
+                <td><a href="{% url 'delete_recruiter' r.id %}" onclick="delete_confirm()" class="btn btn-danger">Delete</a>
+                <a href="{% url 'change_status' r.id %}" onclick="return confirm('Are you really want to change the status of the record?')" class="btn btn-primary">Edit Status</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+<script>
+    function delete_confirm(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            closeOnConfirm: false,
+            closeOnCancel: false,
+            timer: 1000
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Record has been deleted.',
+                'success'
+                )
+            }
+        })
+        
+        
+    }
+</script>
+
+{% endblock %}
+
+{% include 'admin_footer.html' %}
